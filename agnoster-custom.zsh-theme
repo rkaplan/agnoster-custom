@@ -134,6 +134,15 @@ prompt_virtualenv() {
   fi
 }
 
+# Display current conda environment
+prompt_conda() {
+  if [[ -n $CONDA_PREFIX ]]; then
+    color=cyan
+    prompt_segment $color $PRIMARY_FG
+    print -Pn " $(basename $CONDA_PREFIX) "
+  fi
+}
+
 ## Main prompt
 prompt_agnoster_main() {
   RETVAL=$?
@@ -141,6 +150,7 @@ prompt_agnoster_main() {
   prompt_status
   # prompt_context
   prompt_virtualenv
+  prompt_conda
   # prompt_dir
   prompt_cwd
   prompt_git
